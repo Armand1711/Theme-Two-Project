@@ -1,9 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import OpenAI from 'openai'
-import { Avatar3D } from './Avatar3D.jsx'
-
-// Set to true once you drop lulama.glb into /public
-const MODEL_READY = false
+import Avatar from './components/Avatar.jsx'
 
 // ---------------------------------------------------------------------------
 // Lulama's character system prompt
@@ -91,6 +88,7 @@ export default function App() {
   const [ctaActive, setCtaActive] = useState(false)
   const bottomRef = useRef(null)
   const inputRef = useRef(null)
+  const avatarRef = useRef(null)
 
   const assistantCount = messages.filter((m) => m.role === 'assistant').length
   const phase = getPhase(assistantCount)
@@ -126,6 +124,7 @@ export default function App() {
       })
       const reply = completion.choices[0].message.content
       setMessages((prev) => [...prev, { role: 'assistant', content: reply }])
+      avatarRef.current?.speak(reply)
     } catch {
       setMessages((prev) => [
         ...prev,
@@ -183,9 +182,9 @@ export default function App() {
           className="w-2/5 relative shrink-0 border-r border-white/5 overflow-hidden"
           style={{ background: 'radial-gradient(ellipse at 50% 38%, #271B12 0%, #1C1410 52%, #100C08 100%)' }}
         >
-          {/* 3D scene fills the panel */}
+          {/* TalkingHead fills the panel */}
           <div className="absolute inset-0">
-            <Avatar3D isThinking={isLoading} modelReady={MODEL_READY} />
+            <Avatar ref={avatarRef} />
           </div>
 
           {/* Top-left: phase arc */}

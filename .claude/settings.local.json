@@ -4,7 +4,9 @@
       "Bash(npm install:*)",
       "Bash(npm show:*)",
       "Bash(npm run:*)",
-      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173)"
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173)",
+      "Bash(mkdir -p \"c:/Users/arman/OneDrive/Desktop/Theme-Two-Project/lulama/public/models\")",
+      "Bash(cp \"c:/Users/arman/OneDrive/Desktop/Theme-Two-Project/lulama/models/brunette.glb\" \"c:/Users/arman/OneDrive/Desktop/Theme-Two-Project/lulama/public/models/brunette.glb\")"
     ]
   }
 }
