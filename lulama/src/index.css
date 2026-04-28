@@ -16,3 +16,30 @@ html, body, #app {
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
 }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(100%); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(217, 119, 6, 0); }
+  50%       { box-shadow: 0 0 16px 4px rgba(217, 119, 6, 0.25); }
+}
+
+.msg-enter {
+  animation: fadeInUp 0.3s ease-out both;
+}
+
+.cta-slide {
+  animation: slideUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.cta-glow {
+  animation: glowPulse 2.5s ease-in-out infinite;
+}

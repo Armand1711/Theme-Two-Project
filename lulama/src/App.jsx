@@ -1,5 +1,9 @@
 import { useState, useRef, useEffect } from 'react'
 import OpenAI from 'openai'
+import { Avatar3D } from './Avatar3D.jsx'
+
+// Set to true once you drop lulama.glb into /public
+const MODEL_READY = false
 
 // ---------------------------------------------------------------------------
 // Lulama's character system prompt
@@ -54,7 +58,7 @@ IMPORTANT RULES:
 - Do not mention "phases" or your "arc" — the journey should feel natural, not scripted`
 
 // ---------------------------------------------------------------------------
-// Phase helper — based on number of assistant messages sent
+// Phase helper
 // ---------------------------------------------------------------------------
 function getPhase(assistantCount) {
   if (assistantCount <= 4) return 1
@@ -62,15 +66,14 @@ function getPhase(assistantCount) {
   return 3
 }
 
-// Initial greeting message (counts as assistant message 1)
 const INITIAL_MESSAGE = {
   role: 'assistant',
   content:
-    'Molo. My name is Lulama — I\'m a community worker based in Khayelitsha, Cape Town.\n\nI work with children and young people every day, through an organisation called CHOSA. The work is hard and it matters more than I can explain in a sentence.\n\nI want to tell you what it actually looks like — up close, not from a report. But first — who are you? Where are you coming from today?',
+    "Molo. My name is Lulama — I'm a community worker based in Khayelitsha, Cape Town.\n\nI work with children and young people every day, through an organisation called CHOSA. The work is hard and it matters more than I can explain in a sentence.\n\nI want to tell you what it actually looks like — up close, not from a report. But first — who are you? Where are you coming from today?",
 }
 
 // ---------------------------------------------------------------------------
-// Groq client — OpenAI-compatible, key from .env (VITE_GROQ_API_KEY)
+// API client — Groq, OpenAI-compatible
 // ---------------------------------------------------------------------------
 const openai = new OpenAI({
   apiKey: import.meta.env.VITE_GROQ_API_KEY,
@@ -79,7 +82,7 @@ const openai = new OpenAI({
 })
 
 // ---------------------------------------------------------------------------
-// Component
+// App
 // ---------------------------------------------------------------------------
 export default function App() {
   const [messages, setMessages] = useState([INITIAL_MESSAGE])
@@ -89,16 +92,13 @@ export default function App() {
   const bottomRef = useRef(null)
   const inputRef = useRef(null)
 
-  // Count assistant messages to determine phase
   const assistantCount = messages.filter((m) => m.role === 'assistant').length
   const phase = getPhase(assistantCount)
 
-  // Activate donation CTA when phase 3 is reached
   useEffect(() => {
     if (phase === 3 && !ctaActive) setCtaActive(true)
   }, [phase, ctaActive])
 
-  // Auto-scroll to latest message
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages, isLoading])
@@ -109,8 +109,8 @@ export default function App() {
     if (!text || isLoading) return
 
     const userMessage = { role: 'user', content: text }
-    const updatedMessages = [...messages, userMessage]
-    setMessages(updatedMessages)
+    const updated = [...messages, userMessage]
+    setMessages(updated)
     setInput('')
     setIsLoading(true)
 
@@ -119,23 +119,17 @@ export default function App() {
         model: 'llama-3.3-70b-versatile',
         messages: [
           { role: 'system', content: SYSTEM_PROMPT },
-          ...updatedMessages.map((m) => ({ role: m.role, content: m.content })),
+          ...updated.map((m) => ({ role: m.role, content: m.content })),
         ],
         temperature: 0.85,
         max_tokens: 350,
       })
-
       const reply = completion.choices[0].message.content
       setMessages((prev) => [...prev, { role: 'assistant', content: reply }])
-    } catch (err) {
-      console.error(err)
+    } catch {
       setMessages((prev) => [
         ...prev,
-        {
-          role: 'assistant',
-          content:
-            'Yho — something went wrong on my end. Give me a moment and try again, ewe?',
-        },
+        { role: 'assistant', content: "Yho — something went wrong on my end. Give me a moment and try again, ewe?" },
       ])
     } finally {
       setIsLoading(false)
@@ -147,32 +141,33 @@ export default function App() {
     <div className="flex flex-col h-screen overflow-hidden bg-[#120E0A]">
 
       {/* ── Header ── */}
-      <header className="bg-[#120E0A] border-b border-stone-800 flex items-center justify-between px-6 py-3 shrink-0 z-10">
-        <span
-          className="text-white font-medium tracking-wide text-sm"
-          style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-        >
-          Lulama · CHOSA Identity Proxy
-        </span>
+      <header className="bg-[#0E0A07] border-b border-white/5 flex items-center justify-between px-6 py-3.5 shrink-0 z-10">
+        <div className="flex items-center gap-3">
+          <div className="w-px h-4 bg-amber-700/60" />
+          <span
+            className="text-white/90 font-medium tracking-wide text-sm"
+            style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+          >
+            Lulama · CHOSA
+          </span>
+        </div>
 
         <div className="flex items-center gap-4">
-          {/* Phase indicator */}
-          <span className="text-stone-500 text-xs hidden sm:block">
+          <span className="text-stone-600 text-xs hidden sm:block tracking-widest uppercase">
             {phase === 1 && 'Connection'}
             {phase === 2 && 'Revelation'}
             {phase === 3 && 'The Ask'}
           </span>
 
-          {/* Donation button */}
           <a
             href="https://www.chosa.org.za/donate"
             target="_blank"
             rel="noopener noreferrer"
             className={[
-              'px-4 py-1.5 rounded-full text-xs font-medium tracking-wide transition-all duration-500',
+              'px-4 py-1.5 rounded-full text-xs font-medium tracking-wide transition-all duration-700',
               ctaActive
-                ? 'bg-amber-600 text-white shadow-lg shadow-amber-900/50 animate-pulse scale-105'
-                : 'bg-stone-800 text-stone-400 border border-stone-700',
+                ? 'bg-amber-500 text-stone-900 font-semibold cta-glow'
+                : 'bg-transparent text-stone-500 border border-stone-700 hover:border-stone-500 hover:text-stone-300',
             ].join(' ')}
           >
             Support CHOSA
@@ -183,144 +178,136 @@ export default function App() {
       {/* ── Body ── */}
       <div className="flex flex-1 overflow-hidden">
 
-        {/* ── Left panel — Avatar ── */}
-        <div className="w-2/5 bg-[#1C1410] flex flex-col items-center justify-center gap-6 shrink-0 border-r border-stone-800/60">
-
-          {/* Pulse rings + circle */}
-          <div className="relative flex items-center justify-center">
-            <span
-              className="absolute w-56 h-56 rounded-full border border-amber-700/20 animate-ping"
-              style={{ animationDuration: '3s' }}
-            />
-            <span className="absolute w-52 h-52 rounded-full border border-amber-700/10" />
-            <div className="w-44 h-44 rounded-full border border-stone-600 bg-[#241C16] flex items-center justify-center z-10 overflow-hidden">
-              <span className="text-stone-500 text-xs text-center px-6 leading-snug">
-                Avatar coming soon
-              </span>
-            </div>
+        {/* ── Left panel — full 3D canvas ── */}
+        <div
+          className="w-2/5 relative shrink-0 border-r border-white/5 overflow-hidden"
+          style={{ background: 'radial-gradient(ellipse at 50% 38%, #271B12 0%, #1C1410 52%, #100C08 100%)' }}
+        >
+          {/* 3D scene fills the panel */}
+          <div className="absolute inset-0">
+            <Avatar3D isThinking={isLoading} modelReady={MODEL_READY} />
           </div>
 
-          {/* Name + title */}
-          <div className="text-center px-4">
-            <p
-              className="text-white text-2xl"
-              style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-            >
-              Lulama
-            </p>
-            <p
-              className="text-amber-600/70 text-xs tracking-widest uppercase mt-1"
-              style={{ fontFamily: "'Inter', system-ui, sans-serif" }}
-            >
-              Community Worker · Khayelitsha
-            </p>
-          </div>
-
-          {/* Phase pills */}
-          <div className="flex flex-col items-center gap-2 mt-2">
+          {/* Top-left: phase arc */}
+          <div className="absolute top-5 left-5 flex flex-col gap-2 z-10">
             {[
               { n: 1, label: 'Connection' },
               { n: 2, label: 'Revelation' },
               { n: 3, label: 'The Ask' },
             ].map(({ n, label }) => (
               <div key={n} className="flex items-center gap-2">
-                <span
-                  className={[
-                    'w-1.5 h-1.5 rounded-full transition-all duration-500',
-                    phase >= n ? 'bg-amber-500' : 'bg-stone-700',
-                  ].join(' ')}
-                />
-                <span
-                  className={[
-                    'text-xs tracking-wide transition-colors duration-500',
-                    phase === n
-                      ? 'text-amber-400'
-                      : phase > n
-                      ? 'text-stone-500'
-                      : 'text-stone-700',
-                  ].join(' ')}
-                  style={{ fontFamily: "'Inter', system-ui, sans-serif" }}
-                >
+                <div className={[
+                  'w-1.5 h-1.5 rounded-full transition-all duration-700',
+                  phase > n ? 'bg-amber-700' : phase === n ? 'bg-amber-400' : 'bg-stone-700',
+                ].join(' ')} />
+                <span className={[
+                  'text-[10px] tracking-wide transition-colors duration-700',
+                  phase === n ? 'text-amber-400' : phase > n ? 'text-stone-600' : 'text-stone-700',
+                ].join(' ')}>
                   {label}
                 </span>
               </div>
             ))}
           </div>
 
+          {/* Bottom gradient overlay + name */}
+          <div
+            className="absolute bottom-0 left-0 right-0 z-10 px-6 pb-7 pt-20"
+            style={{ background: 'linear-gradient(to top, rgba(12,8,4,0.96) 0%, rgba(12,8,4,0.55) 60%, transparent 100%)' }}
+          >
+            <p
+              className="text-white/90 text-2xl tracking-wide"
+              style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+            >
+              Lulama
+            </p>
+            <p className="text-amber-700/70 text-[11px] tracking-widest uppercase mt-1">
+              Community Worker · Khayelitsha
+            </p>
+            <div className="flex items-center gap-1.5 mt-2.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+              <span className="text-emerald-600/70 text-[10px] tracking-wider uppercase">Online</span>
+            </div>
+          </div>
+
+          {/* Bottom-right: CHOSA mark */}
+          <p className="absolute bottom-5 right-5 text-stone-700 text-[10px] tracking-widest uppercase z-10">
+            CHOSA · Est. 2004
+          </p>
         </div>
 
-        {/* ── Right panel — Chat ── */}
+        {/* ── Right panel ── */}
         <div className="w-3/5 bg-[#FAF6F0] flex flex-col">
 
-          {/* Message list */}
-          <div className="flex-1 overflow-y-auto px-6 py-6 space-y-5">
+          {/* Messages */}
+          <div className="flex-1 overflow-y-auto px-6 py-7 space-y-5">
             {messages.map((msg, i) => (
-              <ChatBubble key={i} message={msg} />
+              <div key={i} className="msg-enter" style={{ animationDelay: `${i * 30}ms` }}>
+                <ChatBubble message={msg} />
+              </div>
             ))}
 
-            {/* Typing indicator */}
-            {isLoading && <TypingIndicator />}
+            {isLoading && (
+              <div className="msg-enter">
+                <TypingIndicator />
+              </div>
+            )}
 
             <div ref={bottomRef} />
           </div>
 
-          {/* CTA banner — appears when phase 3 triggers */}
+          {/* Phase 3 CTA banner */}
           {ctaActive && (
-            <div className="bg-amber-50 border-t border-amber-200 px-6 py-3 flex items-center justify-between shrink-0">
-              <p
-                className="text-amber-900 text-xs leading-snug max-w-xs"
-                style={{ fontFamily: "'Inter', system-ui, sans-serif" }}
-              >
-                Ready to make it real? Your support goes directly to the communities Lulama works with.
-              </p>
+            <div className="cta-slide border-t border-amber-900/20 px-6 py-4 flex items-center justify-between shrink-0"
+              style={{ background: 'linear-gradient(135deg, #1C1208 0%, #241608 100%)' }}
+            >
+              <div>
+                <p
+                  className="text-amber-100/90 text-sm font-medium"
+                  style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+                >
+                  Make it real.
+                </p>
+                <p className="text-amber-400/60 text-xs mt-0.5 leading-snug">
+                  Your support goes directly to the communities Lulama works with.
+                </p>
+              </div>
               <a
                 href="https://www.chosa.org.za/donate"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ml-4 shrink-0 bg-amber-600 hover:bg-amber-700 text-white text-xs font-medium px-4 py-2 rounded-full transition-colors"
+                className="ml-6 shrink-0 bg-amber-500 hover:bg-amber-400 text-stone-900 text-xs font-semibold px-5 py-2.5 rounded-full transition-colors tracking-wide"
               >
                 Donate to CHOSA →
               </a>
             </div>
           )}
 
-          {/* Input form */}
+          {/* Input */}
           <form
             onSubmit={sendMessage}
-            className="border-t border-stone-200 bg-white px-4 py-3 flex items-end gap-3 shrink-0"
+            className="border-t border-stone-200/80 bg-white/70 backdrop-blur-sm px-4 py-3 flex items-end gap-3 shrink-0"
           >
             <textarea
               ref={inputRef}
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                  e.preventDefault()
-                  sendMessage(e)
-                }
+                if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(e) }
               }}
               placeholder="Say something to Lulama…"
               rows={1}
-              className="flex-1 resize-none bg-stone-50 border border-stone-200 rounded-xl px-4 py-2.5 text-sm text-stone-800 placeholder-stone-400 outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400/30 transition-all leading-relaxed"
-              style={{
-                fontFamily: "'Inter', system-ui, sans-serif",
-                maxHeight: '120px',
-                overflowY: 'auto',
-              }}
               disabled={isLoading}
+              className="flex-1 resize-none bg-stone-50 border border-stone-200 rounded-xl px-4 py-2.5 text-sm text-stone-800 placeholder-stone-400 outline-none focus:border-amber-400/60 focus:ring-1 focus:ring-amber-400/20 transition-all leading-relaxed"
+              style={{ fontFamily: "'Inter', system-ui, sans-serif", maxHeight: '120px', overflowY: 'auto' }}
             />
             <button
               type="submit"
               disabled={isLoading || !input.trim()}
-              className="shrink-0 w-10 h-10 rounded-full bg-[#1C1410] flex items-center justify-center disabled:opacity-40 hover:bg-stone-700 transition-colors"
               aria-label="Send"
+              className="shrink-0 w-10 h-10 rounded-full bg-[#1C1410] flex items-center justify-center disabled:opacity-30 hover:bg-amber-900 transition-colors"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                className="w-4 h-4 text-white"
-              >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 text-white">
                 <path d="M3.105 2.288a.75.75 0 0 0-.826.95l1.454 4.425H8.5a.75.75 0 0 1 0 1.5H3.733l-1.454 4.425a.75.75 0 0 0 .826.95 28.896 28.896 0 0 0 15.347-7.208.75.75 0 0 0 0-1.064A28.897 28.897 0 0 0 3.105 2.288Z" />
               </svg>
             </button>
@@ -341,12 +328,17 @@ function ChatBubble({ message }) {
   if (isLulama) {
     return (
       <div className="flex items-start gap-3">
-        {/* Avatar chip */}
-        <div className="w-8 h-8 rounded-full bg-[#1C1410] border border-stone-600 flex items-center justify-center shrink-0 mt-0.5">
-          <span className="text-stone-400 text-[9px] font-medium">L</span>
+        <div
+          className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 mt-0.5"
+          style={{ background: 'radial-gradient(circle, #2E1F14 0%, #1C1410 100%)', border: '1px solid rgba(120,80,40,0.35)' }}
+        >
+          <span className="text-amber-700/80 text-[10px] font-semibold" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>L</span>
         </div>
         <div className="max-w-[80%]">
-          <div className="bg-white rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm border border-stone-100">
+          <div
+            className="bg-white rounded-2xl rounded-tl-sm px-4 py-3.5 shadow-sm"
+            style={{ border: '1px solid #e7e3dc', borderLeft: '2px solid rgba(217,119,6,0.2)' }}
+          >
             <MessageText text={message.content} />
           </div>
         </div>
@@ -356,7 +348,10 @@ function ChatBubble({ message }) {
 
   return (
     <div className="flex justify-end">
-      <div className="max-w-[75%] bg-[#1C1410] rounded-2xl rounded-br-sm px-4 py-3">
+      <div
+        className="max-w-[72%] rounded-2xl rounded-br-sm px-4 py-3.5"
+        style={{ background: 'linear-gradient(135deg, #2A1C12 0%, #1C1410 100%)', border: '1px solid rgba(255,255,255,0.06)' }}
+      >
         <MessageText text={message.content} light />
       </div>
     </div>
@@ -364,14 +359,13 @@ function ChatBubble({ message }) {
 }
 
 function MessageText({ text, light = false }) {
-  // Split on newlines to preserve paragraph breaks
   const paragraphs = text.split('\n').filter((p) => p.trim() !== '')
   return (
-    <div className={['text-sm leading-relaxed space-y-2', light ? 'text-stone-200' : 'text-stone-700'].join(' ')}
-      style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>
-      {paragraphs.map((p, i) => (
-        <p key={i}>{p}</p>
-      ))}
+    <div
+      className={['text-sm leading-relaxed space-y-2', light ? 'text-stone-300' : 'text-stone-700'].join(' ')}
+      style={{ fontFamily: "'Inter', system-ui, sans-serif" }}
+    >
+      {paragraphs.map((p, i) => <p key={i}>{p}</p>)}
     </div>
   )
 }
@@ -379,13 +373,23 @@ function MessageText({ text, light = false }) {
 function TypingIndicator() {
   return (
     <div className="flex items-start gap-3">
-      <div className="w-8 h-8 rounded-full bg-[#1C1410] border border-stone-600 flex items-center justify-center shrink-0">
-        <span className="text-stone-400 text-[9px] font-medium">L</span>
+      <div
+        className="w-8 h-8 rounded-full flex items-center justify-center shrink-0"
+        style={{ background: 'radial-gradient(circle, #2E1F14 0%, #1C1410 100%)', border: '1px solid rgba(120,80,40,0.35)' }}
+      >
+        <span className="text-amber-700/80 text-[10px] font-semibold" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>L</span>
       </div>
-      <div className="bg-white rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm border border-stone-100 flex items-center gap-1.5">
-        <span className="w-1.5 h-1.5 rounded-full bg-stone-400 animate-bounce" style={{ animationDelay: '0ms' }} />
-        <span className="w-1.5 h-1.5 rounded-full bg-stone-400 animate-bounce" style={{ animationDelay: '150ms' }} />
-        <span className="w-1.5 h-1.5 rounded-full bg-stone-400 animate-bounce" style={{ animationDelay: '300ms' }} />
+      <div
+        className="bg-white rounded-2xl rounded-tl-sm px-4 py-3.5 shadow-sm flex items-center gap-1.5"
+        style={{ border: '1px solid #e7e3dc', borderLeft: '2px solid rgba(217,119,6,0.2)' }}
+      >
+        {[0, 150, 300].map((delay) => (
+          <span
+            key={delay}
+            className="w-1.5 h-1.5 rounded-full bg-stone-300 animate-bounce"
+            style={{ animationDelay: `${delay}ms` }}
+          />
+        ))}
       </div>
     </div>
   )
