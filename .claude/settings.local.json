@@ -6,7 +6,17 @@
       "Bash(npm run:*)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173)",
       "Bash(mkdir -p \"c:/Users/arman/OneDrive/Desktop/Theme-Two-Project/lulama/public/models\")",
-      "Bash(cp \"c:/Users/arman/OneDrive/Desktop/Theme-Two-Project/lulama/models/brunette.glb\" \"c:/Users/arman/OneDrive/Desktop/Theme-Two-Project/lulama/public/models/brunette.glb\")"
+      "Bash(cp \"c:/Users/arman/OneDrive/Desktop/Theme-Two-Project/lulama/models/brunette.glb\" \"c:/Users/arman/OneDrive/Desktop/Theme-Two-Project/lulama/public/models/brunette.glb\")",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(curl -s \"https://raw.githubusercontent.com/met4citizen/TalkingHead/1.7/modules/talkinghead.mjs\")",
+      "Bash(curl -s \"https://api.github.com/repos/met4citizen/TalkingHead/tags\")",
+      "Bash(curl -s \"https://raw.githubusercontent.com/met4citizen/TalkingHead/v1.7.0/README.md\")",
+      "Bash(curl -s \"https://raw.githubusercontent.com/met4citizen/TalkingHead/v1.7.0/modules/talkinghead.mjs\")",
+      "WebSearch",
+      "WebFetch(domain:cdn.jsdelivr.net)",
+      "WebFetch(domain:github.com)",
+      "Bash(curl -s \"https://raw.githubusercontent.com/met4citizen/TalkingHead/main/modules/talkinghead.mjs\")",
+      "WebFetch(domain:met4citizen.github.io)"
     ]
   }
 }

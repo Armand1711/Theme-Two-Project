@@ -184,7 +184,10 @@ export default function App() {
         >
           {/* TalkingHead fills the panel */}
           <div className="absolute inset-0">
-            <Avatar ref={avatarRef} />
+            <Avatar
+              ref={avatarRef}
+              onReady={() => avatarRef.current?.speak(INITIAL_MESSAGE.content)}
+            />
           </div>
 
           {/* Top-left: phase arc */}
