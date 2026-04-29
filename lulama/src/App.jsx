@@ -234,7 +234,7 @@ export default function App() {
 
           {/* Bottom-right: CHOSA mark */}
           <p className="absolute bottom-5 right-5 text-stone-700 text-[10px] tracking-widest uppercase z-10">
-            CHOSA · Est. 2004
+            CHOSA · Est. 2005
           </p>
         </div>
 
