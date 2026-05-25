@@ -458,11 +458,11 @@ const Avatar = forwardRef(function Avatar({ onReady }, ref) {
 
   return (
     <Canvas
-      camera={{ position: [0, 0.42, 1.2], fov: 34 }}
+      camera={{ position: [0, 0.28, 1.10], fov: 34 }}
       gl={{ antialias: true, alpha: true }}
       style={{ width: '100%', height: '100%', background: '#1C1410' }}
     >
-      <CameraFocus target={[0, 0.18, 0]} />
+      <CameraFocus target={[0, 0.24, 0]} />
       <ambientLight intensity={0.22} color="#1a0e06" />
       <directionalLight position={[1.2, 3.5, 2]} intensity={2.8} color="#c97c20" castShadow />
       <pointLight position={[-2, 1.5, 1]} intensity={0.9} color="#78350f" />
