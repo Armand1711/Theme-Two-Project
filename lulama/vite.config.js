@@ -7,7 +7,6 @@ export default defineConfig({
   server: {
     proxy: {
       // Proxies /api/tts/* → https://api.elevenlabs.io/*
-      // Keeps the ElevenLabs API key off the public network
       '/api/tts': {
         target: 'https://api.elevenlabs.io',
         changeOrigin: true,
