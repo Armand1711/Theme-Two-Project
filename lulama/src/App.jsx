@@ -63,6 +63,39 @@ const INITIAL_MESSAGE = {
 }
 
 // ---------------------------------------------------------------------------
+// Funding projects — update these to reflect CHOSA's live needs
+// ---------------------------------------------------------------------------
+const PROJECTS = [
+  {
+    id: 1,
+    name: 'Ulwazi Creche Renovation',
+    location: 'Khayelitsha',
+    description: 'New roof, safe windows, and learning materials for 52 young children — their first classroom.',
+    goal: 95000,
+    raised: 71400,
+    tag: 'Early Learning',
+  },
+  {
+    id: 2,
+    name: 'Mfuleni Feeding Programme',
+    location: 'Mfuleni',
+    description: 'One hot meal a day for 140 children, many of whom have nothing waiting at home.',
+    goal: 48000,
+    raised: 19200,
+    tag: 'Nutrition',
+  },
+  {
+    id: 3,
+    name: 'Ikusasa Youth Skills Hub',
+    location: 'Khayelitsha',
+    description: 'Sewing, digital skills, and small business training for 35 young women aged 16–24.',
+    goal: 62000,
+    raised: 8500,
+    tag: 'Youth & Skills',
+  },
+]
+
+// ---------------------------------------------------------------------------
 // Groq client (free tier — console.groq.com)
 // ---------------------------------------------------------------------------
 const groq = new OpenAI({
@@ -231,6 +264,63 @@ function DonateCard() {
         <span className="arrow"> →</span>
       </a>
     </div>
+  )
+}
+
+// ---------------------------------------------------------------------------
+// FundingPanel
+// ---------------------------------------------------------------------------
+function FundingPanel() {
+  const fmt = n => 'R ' + n.toLocaleString('en-ZA')
+  return (
+    <aside className="funding-panel">
+      <div className="fp-inner">
+        <header className="fp-head">
+          <div className="fp-eyebrow">Active Funding Needs</div>
+          <h2 className="fp-title">Where your gift <em>lands</em>.</h2>
+          <p className="fp-sub">
+            Real projects, real communities. Supported through CHOSA's unrestricted funding model.
+          </p>
+        </header>
+
+        <div className="fp-list">
+          {PROJECTS.map(p => {
+            const pct = Math.min(100, Math.round((p.raised / p.goal) * 100))
+            return (
+              <div key={p.id} className="fp-card">
+                <div className="fp-card-meta">
+                  <span className="fp-tag">{p.tag}</span>
+                  <span className="fp-loc">{p.location}</span>
+                </div>
+                <div className="fp-name">{p.name}</div>
+                <p className="fp-desc">{p.description}</p>
+                <div className="fp-progress">
+                  <div className="fp-bar-track">
+                    <div className="fp-bar-fill" style={{ '--fill': `${pct}%` }} />
+                  </div>
+                  <div className="fp-nums">
+                    <span className="fp-raised">{fmt(p.raised)} raised</span>
+                    <span className="fp-pct">{pct}%</span>
+                  </div>
+                  <div className="fp-goal-txt">of {fmt(p.goal)} goal</div>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+
+        <a
+          href="https://www.chosa.org.za/donate"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="fp-cta"
+        >
+          Support a project <span className="fp-arrow">→</span>
+        </a>
+
+        <div className="fp-footer">Children of South Africa · est. 2004</div>
+      </div>
+    </aside>
   )
 }
 
@@ -500,6 +590,8 @@ export default function App() {
           {ctaActive && !isLoading && <DonateCard />}
         </div>
       </div>
+
+      <FundingPanel />
 
       {/* ── Chat mode panel ───────────────────────────────────────────────── */}
       <aside className="chat-panel" aria-hidden={mode !== 'chat'}>

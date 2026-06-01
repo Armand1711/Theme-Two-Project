@@ -458,16 +458,14 @@ const Avatar = forwardRef(function Avatar({ onReady }, ref) {
 
   return (
     <Canvas
-      camera={{ position: [0, 0.28, 1.10], fov: 34 }}
-      gl={{ antialias: true, alpha: true }}
-      style={{ width: '100%', height: '100%', background: '#1C1410' }}
+      camera={{ position: [0, 0.48, 1.15], fov: 36 }}
+      gl={{ antialias: true, alpha: false }}
+      style={{ width: '100%', height: '100%' }}
     >
+      <color attach="background" args={['#0f0805']} />
       <CameraFocus target={[0, 0.24, 0]} />
-      <ambientLight intensity={0.22} color="#1a0e06" />
-      <directionalLight position={[1.2, 3.5, 2]} intensity={2.8} color="#c97c20" castShadow />
-      <pointLight position={[-2, 1.5, 1]} intensity={0.9} color="#78350f" />
-      <pointLight position={[0.5, -1, 2]} intensity={0.4} color="#fbbf24" />
-      <pointLight position={[0, 2, -2]}   intensity={0.6} color="#451a03" />
+      <ambientLight intensity={0.6} color="#c8a070" />
+      <pointLight position={[-2.5, 1.5, 2]} intensity={2.5} color="#c8a070" />
       <Environment preset="sunset" background={false} />
       <Suspense fallback={null}>
         <LulamaModel speakUntil={speakUntil} speechData={speechData} onLoaded={onReady} />
