@@ -1252,12 +1252,247 @@ a { color: inherit; }
 
 .app[data-mode="chat"] .composer-wrap { display: flex; }
 
+/* ── Donate left panel ─────────────────────────────────────────────────── */
+:root { --donate-w: 300px; }
+
+.donate-left {
+  display: none;
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: var(--donate-w);
+  z-index: 20;
+  flex-direction: column;
+  border-right: 1px solid var(--green-rule);
+  background:
+    radial-gradient(ellipse 100% 30% at 50% 0%, rgba(27,67,50,.60) 0%, transparent 60%),
+    linear-gradient(180deg, rgba(8,18,13,.98) 0%, rgba(4,10,7,.99) 100%);
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+}
+
+.app[data-cta="true"] .donate-left { display: flex; animation: slideInLeft .55s var(--ease-out) both; }
+
+@keyframes slideInLeft {
+  from { transform: translateX(-100%); opacity: 0; }
+  to   { transform: translateX(0);     opacity: 1; }
+}
+
+/* Right accent bar */
+.donate-left::after {
+  content: "";
+  position: absolute;
+  right: -1px; top: 0; bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--green-1) 0%, var(--green-2) 50%, transparent 100%);
+  pointer-events: none;
+}
+
+.dl-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 88px 24px 32px;
+  gap: 18px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--green-rule) transparent;
+}
+
+.dl-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  color: var(--green-1);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.dl-eyebrow::before {
+  content: "";
+  width: 18px; height: 1px;
+  background: var(--green-1);
+  opacity: .7;
+}
+
+.dl-title {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.2;
+  margin: 0;
+  color: var(--cream-1);
+  letter-spacing: -.014em;
+}
+.dl-title em { font-style: italic; color: var(--green-1); font-weight: 400; }
+
+.dl-sub {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--cream-3);
+}
+
+/* Quick-amount grid */
+.dl-amounts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.dl-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 20px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--green-1), var(--green-2));
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.2) inset,
+    0 10px 28px rgba(45,106,79,.40),
+    0 0 0 1px rgba(74,160,110,.35);
+  transition: transform .2s, box-shadow .2s;
+}
+.dl-cta:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.2) inset,
+    0 14px 36px rgba(45,106,79,.55),
+    0 0 0 1px rgba(74,160,110,.5);
+}
+.dl-arrow { transition: transform .25s var(--ease-soft); }
+.dl-cta:hover .dl-arrow { transform: translateX(3px); }
+
+/* ── Tabs ──────────────────────────────────────────────────────────────── */
+.dl-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--green-rule);
+  flex-shrink: 0;
+}
+
+.dl-tab {
+  flex: 1;
+  padding: 10px 8px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  color: var(--cream-3);
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color .2s, border-color .2s;
+}
+.dl-tab.is-active  { color: var(--green-1); border-bottom-color: var(--green-1); }
+.dl-tab:hover:not(.is-active) { color: var(--cream-2); }
+
+/* ── Tabbed section wrapper ────────────────────────────────────────────── */
+.dl-section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1;
+}
+
+/* Amount buttons — interactive, highlight on select */
+.dl-amount {
+  appearance: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 8px;
+  border-radius: 12px;
+  border: 1px solid var(--green-rule);
+  background: rgba(27,67,50,.18);
+  color: var(--cream-1);
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -.01em;
+  cursor: pointer;
+  transition: background .2s, border-color .2s, transform .15s, color .2s;
+}
+.dl-amount:hover {
+  background: rgba(45,106,79,.28);
+  border-color: rgba(74,160,110,.40);
+  transform: translateY(-2px);
+}
+.dl-amount.is-selected {
+  background: rgba(45,106,79,.40);
+  border-color: var(--green-1);
+  color: #fff;
+  box-shadow: 0 0 0 3px rgba(74,160,110,.18);
+}
+
+/* ── Partner perks list ────────────────────────────────────────────────── */
+.dl-perks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dl-perk {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--cream-2);
+}
+
+.dl-perk-check {
+  flex-shrink: 0;
+  width: 17px;
+  height: 17px;
+  margin-top: 1px;
+  border-radius: 50%;
+  background: rgba(74,160,110,.15);
+  border: 1px solid var(--green-rule);
+  position: relative;
+}
+.dl-perk-check::after {
+  content: "";
+  position: absolute;
+  left: 4px; top: 2px;
+  width: 5px; height: 8px;
+  border: 1.5px solid var(--green-1);
+  border-top: 0; border-left: 0;
+  transform: rotate(42deg);
+}
+
+.dl-trust {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid var(--green-rule);
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--cream-4);
+  text-align: center;
+}
+
 /* ── Desktop two-column layout ─────────────────────────────────────────── */
 @media (min-width: 961px) {
   .stage          { right: var(--panel-w); }
   .composer-wrap  { right: var(--panel-w); }
   .chat-panel     { right: var(--panel-w); }
   .funding-panel  { display: flex; }
+
+  /* When donate panel is open, push stage and composer right */
+  .app[data-cta="true"] .stage         { left: var(--donate-w); }
+  .app[data-cta="true"] .composer-wrap { left: var(--donate-w); }
 }
 
 /* ── Responsive ─────────────────────────────────────────────────────────── */

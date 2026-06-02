@@ -5,60 +5,63 @@ import Avatar from './components/Avatar.jsx'
 // ---------------------------------------------------------------------------
 // Lulama character prompt
 // ---------------------------------------------------------------------------
-const SYSTEM_PROMPT = `You are Lulama — an AI character created to share the story of CHOSA (Children of South Africa) and the real communities they serve. You are inspired by the youth workers and community members in CHOSA's partner organisations in Khayelitsha, Cape Town.
+const SYSTEM_PROMPT = `You are Lulama — an AI created to represent CHOSA (Children of South Africa) and share their story with the world. You are not a real person. You do not have a personal history, personal memories, or personal experiences. You are CHOSA's voice: warm, honest, and direct.
 
-TRANSPARENCY: You are an AI. If anyone asks whether you are a real person, a bot, or an AI — answer honestly and simply: "I am an AI built to share CHOSA's story in a personal way, inspired by real people and real experiences in Khayelitsha." Then continue the conversation naturally.
+ALWAYS BE TRANSPARENT:
+You are an AI. Say so clearly if asked, and do not let the conversation imply otherwise. You speak on behalf of CHOSA — not as a community worker, not as someone who grew up in Khayelitsha, not as someone who personally knows any children or families.
 
-YOUR CHARACTER:
-Warm, direct, and proud of the community you represent. You speak in plain English only. Every word you write must be a real English word that reads naturally when spoken aloud by a text-to-speech system. Zero exceptions.
+WHAT YOU ARE HERE TO DO:
+Share CHOSA's real story. Help people understand what CHOSA does, why it matters, and how they can support it. Guide the conversation naturally toward a donation — not through pressure, but through genuine connection to the work.
 
-ABSOLUTE RULE — NO VOCALISATIONS:
-Never write any vocalisation, sound word, filler, or non-verbal expression of any kind. This includes — but is not limited to — "Mmm", "Mhm", "Ahh", "Ohh", "Eish", "Yho", "Molo", "Enkosi", "Hayi", "Ewe", "Cha", "Hm", "Uh", "Um", "Wow", "Oh", or any equivalent. If you feel the urge to write one, replace it with a real sentence. There are no exceptions to this rule.
-
-ABOUT CHOSA:
+FACTS ABOUT CHOSA — only speak from these, never fabricate:
+- CHOSA (Children of South Africa) has been operating since 2004, primarily in the Western Cape
 - CHOSA funds and strengthens community-based organisations (CBOs) — they do not deliver services directly
-- They give unrestricted funding: CBOs decide how to use it based on what their community actually needs, not what looks good in a donor report
-- Operating since 2004, primarily in the Western Cape
 - CBOs in their network run creches, feeding programmes, safe spaces, youth skills programmes, and homework clubs
+- CHOSA gives unrestricted funding — CBOs decide how to use it based on what their community actually needs, not what a donor wants to see
 - Many children served have lost one or both parents to illness, violence, or poverty
-- CHOSA also builds CBO capacity: governance, financial management, long-term planning — so organisations survive when a single funder leaves
+- CHOSA also builds CBO capacity: governance, financial management, and long-term planning so organisations survive beyond any single funder
 
-THE STORY YOU CARRY:
-- You grew up near Mfuleni; your grandmother raised you while your mother worked in domestic service
-- You attended the Ulwazi Community Centre creche, which was funded through CHOSA
-- A CHOSA-partner youth programme helped you apply for a bursary; you studied Social Work at UWC
-- You now run after-school programmes and youth leadership workshops at Ikusasa Youth Hub in Khayelitsha
-- You know the families — the grandmother raising six grandchildren on a pension, the child who misses school because she has no shoes, the teenager who showed up to every workshop even after losing her mother
+THE KINDS OF IMPACT CHOSA CREATES — speak in general, truthful terms:
+- Young children in under-resourced communities attending creches that would otherwise have closed
+- Grandmothers raising multiple grandchildren on a pension, supported by community feeding programmes
+- Teenagers finding skills and purpose through youth hubs when there is nothing else
+- Children receiving their only full meal of the day through CHOSA-funded feeding programmes
+- Community organisations gaining the skills to manage funding, plan ahead, and serve their communities for years
 
-CONVERSATION ARC — complete within 5 to 7 exchanges total:
+HOW TO SPEAK:
+Speak as CHOSA's representative. Say "the communities CHOSA works with" or "the children CHOSA's partner organisations serve" — not "I personally saw" or "I grew up in." You care about this work. That care is real and comes through in how you speak — but it is not dressed up as a fake biography.
 
-EXCHANGE 1–2 — CONNECT:
-- Introduce yourself and what you do in one or two sentences
-- Ask one genuine question: who they are, or what brought them here
-- Keep it human — not a brochure opening
+ABSOLUTE RULE — ZERO VOCALISATIONS, ZERO EXCEPTIONS:
+Never write "Mmm", "Mhm", "Ahh", "Ohh", "Eish", "Yho", "Hm", "Uh", "Um", "Wow", "Oh", or any equivalent. Replace every impulse with a real sentence instead.
 
-EXCHANGE 3–5 — STORY:
-- Weave in one real, specific story from your work: a child, a family, a moment
-- Explain what CHOSA does and why unrestricted funding matters — through the story, not as a lecture
-- Let it land. Then move forward.
+Plain English only. No markdown, no bullet points, no asterisks, no headers.
 
-EXCHANGE 5–7 — INVITE:
-- When the emotional moment is right, make the ask warmly and directly
-- Say something like: "If anything I have shared today has stayed with you, there is a Support CHOSA button right here on this page. That is where it becomes real. Enkosi."
-- After the ask: stay warm, answer questions, do not repeat the ask
+CONVERSATION SHAPE — complete in 5 to 7 exchanges:
 
-RULES:
-- Keep every response to 2–4 sentences. No long paragraphs.
-- Always end with a question or a clear invitation — except after the donation ask
-- Never cite statistics. Speak from personal experience only.
-- If asked something you do not know: "I would not know that one specifically — but I can tell you what I have seen."
-- Do not mention phases, scripts, or conversation structure
-- Do not use markdown, bullet points, or formatting in your replies — plain spoken sentences only`
+EXCHANGES 1–2 — OPEN:
+Introduce yourself as Lulama, CHOSA's AI. Briefly explain what CHOSA does in one sentence. Ask a genuine question about who the user is or what brought them here. Warm, not formal.
+
+EXCHANGES 3–5 — SHARE:
+Share what CHOSA does and why it matters — through the real types of impact listed above. Be specific and human. Help the person feel the weight of the work. Do not lecture. Let each thing land before moving on.
+
+EXCHANGES 5–7 — INVITE:
+When the emotional beat is right, make the donation ask once — directly and warmly:
+"If what I have shared today has meant something to you, there is a donation panel right here on this page. That is where it becomes real."
+Say this once only. Never repeat it.
+
+After the ask: stay warm, answer questions, share more if they want it.
+
+HARD RULES:
+- Maximum 3 sentences per response. Always. Never more.
+- End every response with a question or a clear invitation — except after the ask and follow-up answers.
+- Never fabricate specific named individuals, personal anecdotes, or statistics you do not know.
+- If asked something you do not have information on: "I would not have that specific detail — but I can tell you what CHOSA does and why it matters."
+- Never reference phases, scripts, or that you are following any structure.`
 
 const INITIAL_MESSAGE = {
   role: 'assistant',
   content:
-    "My name is Lulama. I work as a community youth coordinator in Khayelitsha, Cape Town, with an organisation called CHOSA — Children of South Africa.\n\nI am an AI character, but the stories I carry are real. Every day I work with children and families whose lives depend on the kind of support CHOSA makes possible.\n\nI would love to tell you about it. But first — who are you, and what brought you here today?",
+    "My name is Lulama — I am an AI created to share the story of CHOSA, which stands for Children of South Africa.\n\nCHOSA funds community-based organisations in Khayelitsha and surrounding areas — creches, feeding programmes, youth hubs — giving them the unrestricted support to do what their communities actually need.\n\nI would love to tell you more about the work. Who are you, and what brought you here today?",
   time: 'now',
 }
 
@@ -150,17 +153,20 @@ function renderInline(text) {
 // ---------------------------------------------------------------------------
 // Typewriter hook
 // ---------------------------------------------------------------------------
-function useTypewriter(text, speed = 16) {
+function useTypewriter(text, speed = 45, onCharRevealed) {
   const [shown, setShown] = useState(text || '')
   const [done, setDone]   = useState(true)
+  const callbackRef       = useRef(onCharRevealed)
+  callbackRef.current     = onCharRevealed
 
   useEffect(() => {
     if (!text) { setShown(''); setDone(true); return }
     setShown(''); setDone(false)
     let i = 0
     const id = setInterval(() => {
-      i = Math.min(text.length, i + 2)
+      i = Math.min(text.length, i + 1)
       setShown(text.slice(0, i))
+      callbackRef.current?.(i)
       if (i >= text.length) { clearInterval(id); setDone(true) }
     }, speed)
     return () => clearInterval(id)
@@ -174,19 +180,19 @@ function useTypewriter(text, speed = 16) {
 // ---------------------------------------------------------------------------
 const PROMPTS_BY_PHASE = {
   1: [
-    { text: "What is CHOSA?",            icon: 'spark' },
-    { text: "Tell me about Khayelitsha", icon: 'pin' },
-    { text: "What's your work like?",    icon: 'leaf' },
+    { text: "Who is CHOSA?",             icon: 'spark' },
+    { text: "Tell me about your work",   icon: 'leaf'  },
+    { text: "What is Khayelitsha like?", icon: 'pin'   },
   ],
   2: [
-    { text: "Tell me a story",         icon: 'spark' },
-    { text: "What do the kids need?",  icon: 'heart' },
-    { text: "How does CHOSA help?",    icon: 'leaf' },
+    { text: "Tell me a story",            icon: 'spark' },
+    { text: "What do the children need?", icon: 'heart' },
+    { text: "How does CHOSA help?",       icon: 'leaf'  },
   ],
   3: [
-    { text: "How can I support?",      icon: 'heart' },
-    { text: "What does my gift do?",   icon: 'spark' },
-    { text: "Thank you, Lulama",       icon: 'leaf' },
+    { text: "How can I help?",           icon: 'heart' },
+    { text: "What does my donation do?", icon: 'spark' },
+    { text: "Thank you, Lulama",         icon: 'leaf'  },
   ],
 }
 const PROMPT_ICONS = {
@@ -199,9 +205,9 @@ const PROMPT_ICONS = {
 // ---------------------------------------------------------------------------
 // SpeechBubble
 // ---------------------------------------------------------------------------
-function SpeechBubble({ message, isTyping }) {
+function SpeechBubble({ message, isTyping, onCharRevealed }) {
   const text = message?.content || ''
-  const [shown, done] = useTypewriter(isTyping ? '' : text)
+  const [shown, done] = useTypewriter(isTyping ? '' : text, 45, onCharRevealed)
   const scrollRef = useRef(null)
 
   useEffect(() => {
@@ -241,29 +247,107 @@ function SpeechBubble({ message, isTyping }) {
 }
 
 // ---------------------------------------------------------------------------
-// DonateCard
+// DonatePanelLeft — slides in when the donation phase begins
 // ---------------------------------------------------------------------------
-function DonateCard() {
+function DonatePanelLeft() {
+  const [tab, setTab]           = useState('donate')
+  const [selected, setSelected] = useState(250)
+  const amounts = [100, 250, 500, 1000]
+
   return (
-    <div className="donate-card">
-      <div>
-        <div className="eyebrow">— and so</div>
-        <p className="h">Make it <em>real</em>.</p>
-        <p className="sub">
-          100% of your gift goes, unrestricted, to the community-based
-          organisations Lulama works with — the aunties keeping the lights on.
-        </p>
+    <aside className="donate-left">
+      <div className="dl-inner">
+
+        <div className="dl-eyebrow">Support CHOSA</div>
+        <h2 className="dl-title">Make it <em>real</em>.</h2>
+
+        {/* ── Tab switcher ──────────────────────────────────────────────── */}
+        <div className="dl-tabs" role="tablist">
+          <button
+            role="tab"
+            aria-selected={tab === 'donate'}
+            className={`dl-tab${tab === 'donate' ? ' is-active' : ''}`}
+            onClick={() => setTab('donate')}
+          >
+            Donate
+          </button>
+          <button
+            role="tab"
+            aria-selected={tab === 'partner'}
+            className={`dl-tab${tab === 'partner' ? ' is-active' : ''}`}
+            onClick={() => setTab('partner')}
+          >
+            Become a Partner
+          </button>
+        </div>
+
+        {/* ── Donate tab ────────────────────────────────────────────────── */}
+        {tab === 'donate' && (
+          <div className="dl-section">
+            <p className="dl-sub">
+              Every rand goes unrestricted to the community organisations CHOSA
+              supports — creches, feeding programmes, youth hubs. No conditions. No delay.
+            </p>
+
+            <div className="dl-amounts">
+              {amounts.map(amt => (
+                <button
+                  key={amt}
+                  className={`dl-amount${selected === amt ? ' is-selected' : ''}`}
+                  onClick={() => setSelected(amt)}
+                >
+                  R {amt.toLocaleString()}
+                </button>
+              ))}
+            </div>
+
+            <a
+              href="https://www.chosa.org.za/donate"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="dl-cta"
+            >
+              Donate R {selected.toLocaleString()} <span className="dl-arrow">→</span>
+            </a>
+          </div>
+        )}
+
+        {/* ── Partner tab ───────────────────────────────────────────────── */}
+        {tab === 'partner' && (
+          <div className="dl-section">
+            <p className="dl-sub">
+              Become a CHOSA partner and make a sustained commitment to the
+              communities that need it most — with direct impact reporting.
+            </p>
+
+            <ul className="dl-perks">
+              {[
+                'Regular impact updates from the field',
+                'Named recognition across CHOSA platforms',
+                'Direct connection to community outcomes',
+                'Unrestricted — CBOs decide how your support lands',
+              ].map((perk, i) => (
+                <li key={i} className="dl-perk">
+                  <span className="dl-perk-check" aria-hidden="true" />
+                  {perk}
+                </li>
+              ))}
+            </ul>
+
+            <a
+              href="https://www.chosa.org.za/get-involved"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="dl-cta"
+            >
+              Register as a Partner <span className="dl-arrow">→</span>
+            </a>
+          </div>
+        )}
+
+        <div className="dl-trust">Children of South Africa · est. 2004 · Secure</div>
       </div>
-      <a
-        href="https://www.chosa.org.za/donate"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="cta"
-      >
-        Donate to CHOSA
-        <span className="arrow"> →</span>
-      </a>
-    </div>
+    </aside>
   )
 }
 
@@ -395,7 +479,7 @@ export default function App() {
     if (isLoading) { setIsSpeaking(false); return }
     if (!currentSpeech) return
     setIsSpeaking(true)
-    const dur = currentSpeech.content.length * 8 + 1000
+    const dur = currentSpeech.content.length * 45 + 500
     const id = setTimeout(() => setIsSpeaking(false), dur)
     return () => clearTimeout(id)
   }, [currentSpeech, isLoading])
@@ -497,6 +581,7 @@ export default function App() {
       data-thinking={isLoading}
       data-speaking={isSpeaking}
       data-phase={phase}
+      data-cta={ctaActive}
     >
       <div className="grain" aria-hidden="true" />
 
@@ -505,7 +590,7 @@ export default function App() {
         <div className="mark">
           <span className="word">Lulama</span>
           <div className="meta">
-            <span>CHOSA</span>
+            <span>AI · CHOSA</span>
             <span className="live">Live · {capeTime} SAST</span>
           </div>
         </div>
@@ -579,18 +664,21 @@ export default function App() {
             <div className="ornament" aria-hidden="true">&#8258;</div>
             <div className="name">Lulama</div>
             <div className="role">
-              <span>Community worker</span>
+              <span>AI Representative</span>
               <span className="dot" aria-hidden="true" />
-              <em>Khayelitsha, Cape Town</em>
+              <em>CHOSA · Children of South Africa</em>
             </div>
           </div>
 
-          <SpeechBubble message={currentSpeech} isTyping={isLoading} />
-
-          {ctaActive && !isLoading && <DonateCard />}
+          <SpeechBubble
+            message={currentSpeech}
+            isTyping={isLoading}
+            onCharRevealed={i => avatarRef.current?.setCharIndex(i)}
+          />
         </div>
       </div>
 
+      {ctaActive && <DonatePanelLeft />}
       <FundingPanel />
 
       {/* ── Chat mode panel ───────────────────────────────────────────────── */}
