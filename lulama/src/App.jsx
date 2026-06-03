@@ -113,6 +113,12 @@ function getPhase(assistantCount) {
   return 3
 }
 
+// Regex: user message expresses clear donation / support intent
+const DONATE_INTENT = /\b(donat\w*|contribut\w*|how\s+(can|do)\s+i\s+(help|give|support|donat\w*|contribut\w*)|i\s+(want|would\s+like|would\s+love)\s+to\s+(give|help|support|donat\w*|contribut\w*)|give\s+back|make\s+a\s+donation|become\s+a\s+partner|register\s+as\s+a\s+partner|how\s+can\s+i\s+help)\b/i
+
+// Regex: Lulama's reply references the donation panel — trigger it immediately
+const PANEL_TRIGGER = /donation\s+panel|donate\s+to\s+chosa|support\s+chosa\s+button|there\s+is\s+a\s+donation|donate\s+now/i
+
 // ---------------------------------------------------------------------------
 // Cape Town clock
 // ---------------------------------------------------------------------------
@@ -510,6 +516,9 @@ export default function App() {
     const t = text.trim()
     if (!t || isLoading) return
 
+    // Show donation panel immediately if the user is asking about giving
+    if (DONATE_INTENT.test(t)) setCtaActive(true)
+
     const now = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })
     const userMsg = { role: 'user', content: t, time: now }
     const updated = [...messages, userMsg]
@@ -537,6 +546,9 @@ export default function App() {
       })
 
       const reply = completion.choices[0].message.content
+
+      // Also trigger if Lulama's reply references the donation panel
+      if (PANEL_TRIGGER.test(reply)) setCtaActive(true)
 
       const replyTime = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })
       setMessages(prev => [...prev, { role: 'assistant', content: reply, time: replyTime }])
