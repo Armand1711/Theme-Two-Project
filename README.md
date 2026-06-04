@@ -336,8 +336,6 @@ Learn more at [chosa.org](https://www.chosa.org).
 
 **Armand** 
 
-Built as part of the PP 410 final portfolio at the Cape Peninsula University of Technology.
-
 <br/>
 
 ---
