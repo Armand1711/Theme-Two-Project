@@ -266,7 +266,7 @@ lulama/
 
 ## Adding Community Photos
 
-The background gallery rotates through images placed in `public/gallery/`. Name each file `photo-01.jpg` through `photo-09.jpg`. The component detects which files are present and silently skips any that are missing, so photos can be added one at a time. Each image displays at 9% opacity with a slow Ken Burns pan, providing subtle environmental texture without distracting from the conversation.
+The background gallery rotates through images placed in `/public/gallery/`. Name each file `photo-01.jpg` through `photo-09.jpg`. The component detects which files are present and silently skips any that are missing, so photos can be added one at a time. Each image displays at 9% opacity with a slow Ken Burns pan, providing subtle environmental texture without distracting from the conversation.
 
 <br/>
 
@@ -326,7 +326,7 @@ Full accessibility audit covering screen reader support and keyboard navigation 
 
 Built for CHOSA (Children of South Africa). Their mission to fund and strengthen community-based organisations in the Western Cape since 2004 is what this project exists to support.
 
-Learn more at [chosa.org](https://www.chosa.org) or donate at [chosa.org.za/donate](https://www.chosa.org.za/donate).
+Learn more at [chosa.org](https://www.chosa.org).
 
 <br/>
 
@@ -334,7 +334,7 @@ Learn more at [chosa.org](https://www.chosa.org) or donate at [chosa.org.za/dona
 
 ## Author
 
-**Armand** &nbsp;|&nbsp; [contact@luminara.design](mailto:contact@luminara.design)
+**Armand** 
 
 Built as part of the PP 410 final portfolio at the Cape Peninsula University of Technology.
 
