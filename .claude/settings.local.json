@@ -16,7 +16,8 @@
       "WebFetch(domain:cdn.jsdelivr.net)",
       "WebFetch(domain:github.com)",
       "Bash(curl -s \"https://raw.githubusercontent.com/met4citizen/TalkingHead/main/modules/talkinghead.mjs\")",
-      "WebFetch(domain:met4citizen.github.io)"
+      "WebFetch(domain:met4citizen.github.io)",
+      "WebFetch(domain:www.chosa.org)"
     ]
   }
 }
