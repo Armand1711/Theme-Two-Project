@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/mockups/mockup-06-showcase.png" alt="Lulama — CHOSA AI Representative shown across multiple screens" width="100%" />
+<img src="lulama/docs/mockups/mockup-06-showcase.png" alt="Lulama — CHOSA AI Representative shown across multiple screens" width="100%" />
 
 # Lulama — CHOSA AI Representative
 
@@ -60,7 +60,7 @@ The system is designed around three core ideas.
 ### Avatar View
 
 <div align="center">
-  <img src="docs/mockups/mockup-01-avatar.png" alt="Avatar view with Lulama 3D character and speech bubble" width="80%" />
+  <img src="lulama/docs/mockups/mockup-01-avatar.png" alt="Avatar view with Lulama 3D character and speech bubble" width="80%" />
 </div>
 
 <br/>
@@ -72,7 +72,7 @@ The main view presents Lulama as a 3D animated character rendered in a WebGL can
 ### Chat History View
 
 <div align="center">
-  <img src="docs/mockups/mockup-02-chat.png" alt="Chat history view showing full conversation transcript" width="80%" />
+  <img src="lulama/docs/mockups/mockup-02-chat.png" alt="Chat history view showing full conversation transcript" width="80%" />
 </div>
 
 <br/>
@@ -84,7 +84,7 @@ Switching to History mode replaces the avatar stage with a full conversation tra
 ### Full Layout — Donation Panel and Funding Panel
 
 <div align="center">
-  <img src="docs/mockups/mockup-03-full-layout.png" alt="Full three-column layout showing donation panel, avatar, and funding panel" width="80%" />
+  <img src="lulama/docs/mockups/mockup-03-full-layout.png" alt="Full three-column layout showing donation panel, avatar, and funding panel" width="80%" />
 </div>
 
 <br/>
@@ -96,7 +96,7 @@ On desktop the layout splits into three columns. The funding panel on the right 
 ### Payment Modal
 
 <div align="center">
-  <img src="docs/mockups/mockup-04-payment.png" alt="Payment modal with demo card form fields" width="80%" />
+  <img src="lulama/docs/mockups/mockup-04-payment.png" alt="Payment modal with demo card form fields" width="80%" />
 </div>
 
 <br/>
@@ -108,7 +108,7 @@ Clicking Donate opens a full-viewport modal centred over the interface. Each fie
 ### Donation Confirmed
 
 <div align="center">
-  <img src="docs/mockups/mockup-05-success.png" alt="Donation success state showing thank you message" width="60%" />
+  <img src="lulama/docs/mockups/mockup-05-success.png" alt="Donation success state showing thank you message" width="60%" />
 </div>
 
 <br/>
@@ -190,8 +190,8 @@ You will need the following before running the project.
 Clone the repository and install dependencies.
 
 ```bash
-git clone https://github.com/Armand1711/lulama.git
-cd lulama
+git clone https://github.com/Armand1711/Theme-Two-Project.git
+cd Theme-Two-Project/lulama
 npm install
 ```
 
