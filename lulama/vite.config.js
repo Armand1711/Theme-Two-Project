@@ -4,7 +4,6 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: '/Theme-Two-Project/',
   server: {
     proxy: {
       // Proxies /api/tts/* → https://api.elevenlabs.io/*
